@@ -1,5 +1,12 @@
-def think(task):
-    print("AI Brain received task:")
-    print(task)
+from openai import OpenAI
+import os
 
-think("Learn, improve, and build")
+client = OpenAI(api_key=os.environ["OPENAI_API_KEY"])
+
+def think(task):
+    response = client.responses.create(
+        model="gpt-4.1-mini",
+        input=task
+    )
+
+    print(response.output_text)
